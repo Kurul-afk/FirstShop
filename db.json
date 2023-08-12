@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "title": "redmi pro max 7 k lvl",
+      "desc": "the best phone in the world, buy right now",
+      "img": "https://mi-shop.kg/wp-content/uploads/2022/02/img_0_77_3394_4_1.jpg",
+      "price": "2333",
+      "id": 1
+    },
+    {
+      "title": "new phone for us",
+      "desc": "yeah i agree with him",
+      "img": "https://login.kg/image/cache/catalog/new/Phones/Xiaomi/Note%2012/1-500x500.jpg",
+      "price": "2333",
+      "id": 2
+    }
+  ]
+}
