@@ -9,12 +9,19 @@ const productDesc = document.querySelector("#productDesc");
 const productImg = document.querySelector("#productImg");
 const productPrice = document.querySelector("#productPrice");
 const cardContainer = document.querySelector("#cardContainer");
+const btnEditProduct = document.querySelector("#btnEditProduct");
 
 createProduct.addEventListener("click", () => {
   modal.style.display = "block";
 });
 
 closeModal.addEventListener("click", () => {
+  productTitle.value = "";
+  productDesc.value = "";
+  productImg.value = "";
+  productPrice.value = "";
+  btnEditProduct.style.display = "none";
+  btnAddNewProduct.style.display = "block";
   modal.style.display = "none";
 });
 
@@ -94,5 +101,62 @@ document.addEventListener("click", async ({ target: { classList, id } }) => {
   }
   render();
 });
+
+document.addEventListener("click", async ({ target: { classList, id } }) => {
+  console.log(classList);
+  const delBtn = [...classList];
+  if (delBtn.includes("card_btn-edit")) {
+    const res = await fetch(`${API}/${id}`);
+    const { title, desc, img, price, id: productId } = await res.json();
+    productTitle.value = title;
+    productDesc.value = desc;
+    productImg.value = img;
+    productPrice.value = price;
+    btnEditProduct.style.display = "block";
+    modal.style.display = "block";
+    btnEditProduct.textContent = "Save";
+    btnEditProduct.setAttribute("id", productId);
+    btnAddNewProduct.style.display = "none";
+  }
+  render();
+});
+
+btnEditProduct.addEventListener("click", ({ target: id }) => {
+  if (
+    !productTitle.value.trim() ||
+    !productDesc.value.trim() ||
+    !productImg.value.trim() ||
+    !productPrice.value.trim()
+  ) {
+    return alert("Заполните пустые поля");
+  }
+  const editedProduct = {
+    title: productTitle.value,
+    desc: productDesc.value,
+    img: productImg.value,
+    price: productPrice.value,
+  };
+  editProduct(editedProduct, btnEditProduct.id);
+});
+
+async function editProduct(product, id) {
+  try {
+    await fetch(`${API}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json; charset = utf-8" },
+      body: JSON.stringify(product),
+    });
+    productTitle.value = "";
+    productDesc.value = "";
+    productImg.value = "";
+    productPrice.value = "";
+    btnEditProduct.style.display = "none";
+    modal.style.display = "none";
+    btnAddNewProduct.style.display = "block";
+    render();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 render();
