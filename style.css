@@ -15,6 +15,9 @@ body {
   margin: 0px;
   padding: 0px;
 }
+button {
+  cursor: pointer;
+}
 header {
   background-color: #2b2730;
   width: 100%;
@@ -39,6 +42,9 @@ header {
   color: #faf3f0;
   text-decoration: none;
 }
+.header_link:hover {
+  color: #a79cd9;
+}
 .header_input {
   padding: 5px 10px;
   font-family: "Roboto Mono", monospace;
@@ -52,6 +58,21 @@ header {
   border: none;
   background-color: #6554af;
   color: #faf3f0;
+}
+.header_input-btn:hover {
+  background-color: #faf3f0;
+  color: #6554af;
+}
+.header_sign-btn {
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #6554af;
+  color: #faf3f0;
+}
+.header_sign-btn:hover {
+  background-color: #faf3f0;
+  color: #6554af;
 }
 .main_container {
   width: 90%;
@@ -99,7 +120,6 @@ header {
 .close:focus {
   color: #6554af;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .modal_input-container {
@@ -124,7 +144,6 @@ header {
   background-color: #6554af;
   color: #faf3f0;
   text-decoration: none;
-  cursor: pointer;
 }
 
 /* Cards! */
@@ -153,8 +172,11 @@ header {
   white-space: normal;
 }
 .card_item-desc {
-  font-size: 14px;
+  font-size: 12px;
   white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card_btn-delete {
   background-color: #f8615a;
@@ -165,7 +187,6 @@ header {
 .card_btn-delete:focus {
   background-color: #d7554e;
   color: #faf3f0;
-  cursor: pointer;
 }
 .card_btn-edit {
   background-color: #4fc0d0;
@@ -176,7 +197,6 @@ header {
 .card_btn-edit:focus {
   background-color: #3c909b;
   color: #faf3f0;
-  cursor: pointer;
 }
 .Editmodal_input-btn {
   display: none;
@@ -190,5 +210,47 @@ header {
   background-color: #6554af;
   color: #faf3f0;
   text-decoration: none;
-  cursor: pointer;
+}
+
+/* pagination */
+.pagination {
+  width: 100%;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.pagination-btn {
+  padding: 10px 0;
+  background-color: #faf3f0;
+  border: 5px solid #6554af;
+}
+#prevBtn {
+  border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#nextBtn {
+  border-radius: 0 10px 10px 0;
+  padding-left: 26px;
+  padding-right: 26px;
+}
+#prevBtn:hover {
+  border: 5px solid #faf3f0;
+  background-color: #6554af;
+  color: #faf3f0;
+}
+#prevBtn:active {
+  background-color: #483c7f;
+  border: 5px solid #cecac7;
+}
+#nextBtn:hover {
+  border: 5px solid #faf3f0;
+  background-color: #6554af;
+  color: #faf3f0;
+}
+#nextBtn:active {
+  background-color: #483c7f;
+  border: 5px solid #cecac7;
 }

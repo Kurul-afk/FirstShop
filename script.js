@@ -1,4 +1,5 @@
 const API = "http://localhost:3000/products";
+const usersAPI = "http://localhost:3000/users";
 const createProduct = document.querySelector("#createProduct");
 // Получаем элементы
 const modal = document.querySelector("#myModal");
@@ -10,6 +11,16 @@ const productImg = document.querySelector("#productImg");
 const productPrice = document.querySelector("#productPrice");
 const cardContainer = document.querySelector("#cardContainer");
 const btnEditProduct = document.querySelector("#btnEditProduct");
+
+const signInBtn = document.querySelector("#signInBtn");
+
+const limit = 5;
+const prevBtn = document.querySelector("#prevBtn");
+const nextBtn = document.querySelector("#nextBtn");
+
+// Переменные для пагинации
+let currentPage = 1;
+let countPage = 1;
 
 createProduct.addEventListener("click", () => {
   modal.style.display = "block";
@@ -59,10 +70,20 @@ async function addNewProduct(product) {
 }
 
 async function render() {
-  const res = await fetch(API);
+  const res = await fetch(`${API}?_page=${currentPage}&_limit=${limit}`);
+  countPage = Math.ceil(res.headers.get("x-total-count") / limit);
   const data = await res.json();
   cardContainer.innerHTML = "";
+  const maxTitleValue = 14;
+  const maxDescValue = 24;
   data.forEach(({ title, desc, img, price, id }) => {
+    console.log(desc.length);
+    const truncatedTitle = // Обрезаю заголовок если его длину строки больше заданного
+      title.length > maxTitleValue
+        ? title.slice(0, maxTitleValue) + "..."
+        : title;
+    // const truncatedDesc =
+    //   desc.length > maxDescValue ? desc.slice(0, maxDescValue) + "..." : desc;
     cardContainer.innerHTML += `
           <div class="card_item">
             <img
@@ -72,7 +93,7 @@ async function render() {
             />
             <div class="card_item-bottom">
               <div class="card_item-text">
-                <h3 class="card_item-title">${title}</h3>
+                <h3 class="card_item-title">${truncatedTitle}</h3>
                 <p class="card_item-desc">${desc}</p>
                 <p class="card_item-price">price: ${price}$</p>
               </div>
@@ -84,6 +105,7 @@ async function render() {
           </div>
     `;
   });
+  // pageFunc();
 }
 
 document.addEventListener("click", async ({ target: { classList, id } }) => {
@@ -158,5 +180,21 @@ async function editProduct(product, id) {
     console.log(error);
   }
 }
+
+// async function pageFunc() {
+//   const res = fetch(API);
+//   const data = res.json();
+//   countPage = Math.ceil(data.length / limit);
+// }
+prevBtn.addEventListener("click", () => {
+  if (currentPage <= 1) return;
+  currentPage -= 1;
+  render();
+});
+nextBtn.addEventListener("click", () => {
+  if (currentPage >= countPage) return;
+  currentPage += 1;
+  render();
+});
 
 render();
