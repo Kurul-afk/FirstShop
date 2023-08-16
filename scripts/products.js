@@ -1,5 +1,4 @@
 const API = "http://localhost:3000/products";
-const usersAPI = "http://localhost:3000/users";
 const createProduct = document.querySelector("#createProduct");
 // Получаем элементы
 const modal = document.querySelector("#myModal");
@@ -12,7 +11,7 @@ const productPrice = document.querySelector("#productPrice");
 const cardContainer = document.querySelector("#cardContainer");
 const btnEditProduct = document.querySelector("#btnEditProduct");
 
-const signInBtn = document.querySelector("#signInBtn");
+let searchValue = "";
 
 const limit = 5;
 const prevBtn = document.querySelector("#prevBtn");
@@ -68,10 +67,16 @@ async function addNewProduct(product) {
   modal.style.display = "none";
   render();
 }
-
 async function render() {
-  const res = await fetch(`${API}?_page=${currentPage}&_limit=${limit}`);
-  countPage = Math.ceil(res.headers.get("x-total-count") / limit);
+  let res;
+  if (searchValue) {
+    res = await fetch(
+      `${API}?title=${searchValue}&_page=${currentPage}&_limit=${limit}`
+    );
+  } else {
+    res = await fetch(`${API}?_page=${currentPage}&_limit=${limit}`);
+    countPage = Math.ceil(res.headers.get("x-total-count") / limit);
+  }
   const data = await res.json();
   cardContainer.innerHTML = "";
   const maxTitleValue = 14;
@@ -82,8 +87,8 @@ async function render() {
       title.length > maxTitleValue
         ? title.slice(0, maxTitleValue) + "..."
         : title;
-    // const truncatedDesc =
-    //   desc.length > maxDescValue ? desc.slice(0, maxDescValue) + "..." : desc;
+    const truncatedDesc =
+      desc.length > maxDescValue ? desc.slice(0, maxDescValue) + "..." : desc;
     cardContainer.innerHTML += `
           <div class="card_item">
             <img
@@ -94,12 +99,13 @@ async function render() {
             <div class="card_item-bottom">
               <div class="card_item-text">
                 <h3 class="card_item-title">${truncatedTitle}</h3>
-                <p class="card_item-desc">${desc}</p>
+                <p class="card_item-desc">${truncatedDesc}</p>
                 <p class="card_item-price">price: ${price}$</p>
               </div>
               <div class="card_item-buttons">
                 <button class="card_btn-delete" id=${id}>delete</button>
                 <button class="card_btn-edit" id=${id}>edit</button>
+                <a href="./detailPage.html"><button class="card_btn-detail" id=${id}>detail</button></a>
               </div>
             </div>
           </div>
@@ -109,9 +115,7 @@ async function render() {
 }
 
 document.addEventListener("click", async ({ target: { classList, id } }) => {
-  console.log(classList);
-  const delBtn = [...classList];
-  if (delBtn.includes("card_btn-delete")) {
+  if (classList.contains("card_btn-delete")) {
     try {
       await fetch(`${API}/${id}`, {
         method: "DELETE",
@@ -126,8 +130,7 @@ document.addEventListener("click", async ({ target: { classList, id } }) => {
 
 document.addEventListener("click", async ({ target: { classList, id } }) => {
   console.log(classList);
-  const delBtn = [...classList];
-  if (delBtn.includes("card_btn-edit")) {
+  if (classList.contains("card_btn-edit")) {
     const res = await fetch(`${API}/${id}`);
     const { title, desc, img, price, id: productId } = await res.json();
     productTitle.value = title;
@@ -181,11 +184,23 @@ async function editProduct(product, id) {
   }
 }
 
-// async function pageFunc() {
-//   const res = fetch(API);
-//   const data = res.json();
-//   countPage = Math.ceil(data.length / limit);
-// }
+document.addEventListener("click", ({ target: { classList, id } }) => {
+  if (classList.contains("card_btn-detail")) {
+    localStorage.setItem("anotherPage-id", id);
+  }
+  render();
+});
+
+const searchInp = document.querySelector(".header_input");
+const searchBtn = document.querySelector(".header_input-btn");
+
+searchInp.addEventListener("input", ({ target: { value } }) => {
+  searchValue = value;
+});
+searchBtn.addEventListener("click", () => {
+  render();
+});
+
 prevBtn.addEventListener("click", () => {
   if (currentPage <= 1) return;
   currentPage -= 1;

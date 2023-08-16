@@ -1,27 +1,6 @@
 {
   "products": [
     {
-      "title": "redmi pro max 7 k lvl",
-      "desc": "the best phone in the world, buy right now",
-      "img": "https://mi-shop.kg/wp-content/uploads/2022/02/img_0_77_3394_4_1.jpg",
-      "price": "2333",
-      "id": 1
-    },
-    {
-      "title": "New phone",
-      "desc": "yeah i agree with him",
-      "img": "https://login.kg/image/cache/catalog/new/Phones/Xiaomi/Note%2012/1-500x500.jpg",
-      "price": "23336",
-      "id": 2
-    },
-    {
-      "title": "redmi pro max 7 k lvl",
-      "desc": "the best phone in the world, buy right now sdiadiasdad sadadasdasd",
-      "img": "https://mi-shop.kg/wp-content/uploads/2022/02/img_0_77_3394_4_1.jpg",
-      "price": "2333",
-      "id": 3
-    },
-    {
       "title": "okay 232323 sds dfd",
       "desc": "yeah i agree with him",
       "img": "https://login.kg/image/cache/catalog/new/Phones/Xiaomi/Note%2012/1-500x500.jpg",
@@ -29,40 +8,25 @@
       "id": 4
     },
     {
-      "title": "redmi pro max 7 k lvlsd",
-      "desc": "the best phone in the world, buy right now sssssss",
-      "img": "https://mi-shop.kg/wp-content/uploads/2022/02/img_0_77_3394_4_1.jpg",
-      "price": "2333",
-      "id": 5
-    },
-    {
-      "title": "new phone for u",
+      "title": "new phone for",
       "desc": "yeah i agree with him",
       "img": "https://login.kg/image/cache/catalog/new/Phones/Xiaomi/Note%2012/1-500x500.jpg",
-      "price": "23336",
+      "price": "222",
       "id": 6
     },
     {
-      "title": "redmi pro max 7 k lvl",
-      "desc": "the best phone in the world, buy right now",
+      "title": "redmi pro343",
+      "desc": "OLED дисплей имеет высокую пиковую яркость в 1200 нит и остается хорошо читаем на солнце, 100% охват цветового пространства DCI-P3 подарит невероятно точную и красочную картинку, а разрешение FulHD+ позволит смотреть видео и фильмы в высоком качестве.",
       "img": "https://mi-shop.kg/wp-content/uploads/2022/02/img_0_77_3394_4_1.jpg",
-      "price": "2333",
+      "price": "25",
       "id": 7
     },
     {
-      "title": "new phone for u",
-      "desc": "yeah i agree with him",
-      "img": "https://login.kg/image/cache/catalog/new/Phones/Xiaomi/Note%2012/1-500x500.jpg",
-      "price": "23336",
-      "id": 8
-    },
-    {
-      "title": "new phone lll",
-      "desc": "2222222 5555",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcg-gYEAIKShV-9H1I5sElu4Qj--DKYBhK1Q&usqp=CAU",
+      "title": "arsen",
+      "desc": "555",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFjbzwN-gqxpyalgMRwwfNVsbJFPXMus6A8EEl2dYG9A&s",
       "price": "255",
-      "id": 9
+      "id": 8
     }
-  ],
-  "users": []
+  ]
 }
